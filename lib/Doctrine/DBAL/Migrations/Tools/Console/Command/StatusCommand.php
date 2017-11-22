@@ -59,8 +59,8 @@ EOT
     {
         $configuration = $this->getMigrationConfiguration($input, $output);
 
-        $formattedVersions = [];
-        foreach (['prev', 'current', 'next', 'latest'] as $alias) {
+        $formattedVersions = array();
+        foreach (array('prev', 'current', 'next', 'latest') as $alias) {
             $version = $configuration->resolveVersionAlias($alias);
             if ($version === null) {
                 if ($alias == 'next') {
@@ -83,7 +83,7 @@ EOT
 
         $output->writeln("\n <info>==</info> Configuration\n");
 
-        $info = [
+        $info = array(
             'Name'                              => $configuration->getName() ? $configuration->getName() : 'Doctrine Database Migrations',
             'Database Driver'                   => $configuration->getConnection()->getDriver()->getName(),
             'Database Name'                     => $configuration->getConnection()->getDatabase(),
@@ -100,7 +100,7 @@ EOT
             'Executed Unavailable Migrations'   => $numExecutedUnavailableMigrations > 0 ? '<error>'.$numExecutedUnavailableMigrations.'</error>' : 0,
             'Available Migrations'              => count($availableMigrations),
             'New Migrations'                    => $newMigrations > 0 ? '<question>' . $newMigrations . '</question>' : 0
-        ];
+        );
         foreach ($info as $name => $value) {
             $output->writeln('    <comment>>></comment> ' . $name . ': ' . str_repeat(' ', 50 - strlen($name)) . $value);
         }

@@ -73,12 +73,12 @@ class ConfigurationHelper extends Helper
         /**
          * If no any other config has been found, look for default config file in the path.
          */
-        $defaultConfig = [
+        $defaultConfig = array(
             'migrations.xml',
             'migrations.yml',
             'migrations.yaml',
             'migrations.json'
-        ];
+        );
         foreach ($defaultConfig as $config) {
             if ($this->configExists($config)) {
                 $outputWriter->write("Loading configuration from file: $config");

@@ -1,2 +1,2 @@
 <?php
-return ["organize_migrations" => "year_AND_MOnth"];
+return array("organize_migrations" => "year_AND_MOnth");

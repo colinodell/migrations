@@ -70,7 +70,7 @@ class ConfigurationTest extends MigrationTestCase
         $this->assertSame('0', $config->getLatestVersion(), "latest version 0");
         $this->assertEquals(0, $config->getNumberOfAvailableMigrations(), "number of available migrations 0");
         $this->assertEquals(0, $config->getNumberOfExecutedMigrations(), "number of executed migrations 0");
-        $this->assertEquals([], $config->getMigrations());
+        $this->assertEquals(array(), $config->getMigrations());
     }
 
     public function testGetUnknownVersion()
@@ -101,10 +101,10 @@ class ConfigurationTest extends MigrationTestCase
     public function testRegisterMigrations()
     {
         $config = $this->getSqliteConfiguration();
-        $config->registerMigrations([
+        $config->registerMigrations(array(
             1234 => 'Doctrine\DBAL\Migrations\Tests\Stub\Version1Test',
             1235 => 'Doctrine\DBAL\Migrations\Tests\Stub\Version2Test',
-        ]);
+        ));
 
         $this->assertEquals(2, count($config->getMigrations()), "Two Migration registered.");
 
@@ -131,11 +131,11 @@ class ConfigurationTest extends MigrationTestCase
     public function testPreviousCurrentNextLatestVersion()
     {
         $config = $this->getSqliteConfiguration();
-        $config->registerMigrations([
+        $config->registerMigrations(array(
             1234 => 'Doctrine\DBAL\Migrations\Tests\Stub\Version1Test',
             1235 => 'Doctrine\DBAL\Migrations\Tests\Stub\Version2Test',
             1236 => 'Doctrine\DBAL\Migrations\Tests\Stub\Version3Test',
-        ]);
+        ));
 
         $this->assertSame(null, $config->getPrevVersion(), "no prev version");
         $this->assertSame('0', $config->getCurrentVersion(), "current version 0");
@@ -177,7 +177,7 @@ class ConfigurationTest extends MigrationTestCase
         $config = $this->getSqliteConfiguration();
 
         $config->registerMigration(1234, 'Doctrine\DBAL\Migrations\Tests\Stub\Version1Test');
-        $this->assertEquals([1234], $config->getAvailableVersions());
+        $this->assertEquals(array(1234), $config->getAvailableVersions());
     }
 
     /**
@@ -202,14 +202,14 @@ class ConfigurationTest extends MigrationTestCase
 
     public function versionProvider()
     {
-        return [
-            ['20150101123545Version', '2015-01-01 12:35:45'],
-            ['tralalaVersion', ''],
-            ['0000254Version', ''],
-            ['0000254BaldlfqjdVersion', ''],
-            ['20130101123545Version', '2013-01-01 12:35:45'],
-            ['20150202042811', '2015-02-02 04:28:11'],
-            ['20150202162811', '2015-02-02 16:28:11']
-        ];
+        return array(
+            array('20150101123545Version', '2015-01-01 12:35:45'),
+            array('tralalaVersion', ''),
+            array('0000254Version', ''),
+            array('0000254BaldlfqjdVersion', ''),
+            array('20130101123545Version', '2013-01-01 12:35:45'),
+            array('20150202042811', '2015-02-02 04:28:11'),
+            array('20150202162811', '2015-02-02 16:28:11')
+        );
     }
 }

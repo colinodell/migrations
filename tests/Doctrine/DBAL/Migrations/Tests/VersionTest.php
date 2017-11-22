@@ -134,13 +134,13 @@ class VersionTest extends MigrationTestCase
      */
     public function stateProvider()
     {
-        return [
-            [Version::STATE_NONE],
-            [Version::STATE_EXEC],
-            [Version::STATE_POST],
-            [Version::STATE_PRE],
-            [-1],
-        ];
+        return array(
+            array(Version::STATE_NONE),
+            array(Version::STATE_EXEC),
+            array(Version::STATE_POST),
+            array(Version::STATE_PRE),
+            array(-1),
+        );
     }
 
     /**
@@ -155,9 +155,9 @@ class VersionTest extends MigrationTestCase
             'Doctrine\DBAL\Migrations\Tests\Stub\VersionDummy'
         );
         $this->assertNull($version->addSql('SELECT * FROM foo'));
-        $this->assertNull($version->addSql(['SELECT * FROM foo']));
-        $this->assertNull($version->addSql(['SELECT * FROM foo WHERE id = ?'], [1]));
-        $this->assertNull($version->addSql(['SELECT * FROM foo WHERE id = ?'], [1], [\PDO::PARAM_INT]));
+        $this->assertNull($version->addSql(array('SELECT * FROM foo')));
+        $this->assertNull($version->addSql(array('SELECT * FROM foo WHERE id = ?'), array(1)));
+        $this->assertNull($version->addSql(array('SELECT * FROM foo WHERE id = ?'), array(1), array(\PDO::PARAM_INT)));
     }
 
     /**
@@ -175,17 +175,17 @@ class VersionTest extends MigrationTestCase
         $outputWriter->shouldReceive('write');
 
         $connection = m::mock('Doctrine\DBAL\Connection');
-        $connection->shouldReceive([
+        $connection->shouldReceive(array(
             'getSchemaManager' => 'something',
             'getDatabasePlatform' => 'something else',
-        ]);
+        ));
 
         $config = m::mock('Doctrine\DBAL\Migrations\Configuration\Configuration')
             ->makePartial();
         $config->shouldReceive('getOutputWriter')->andReturn($outputWriter);
         $config->shouldReceive('getConnection')->andReturn($connection);
 
-        $migration = m::mock('Doctrine\DBAL\Migrations\Version[execute]', [$config, $version, 'stdClass'])->makePartial();
+        $migration = m::mock('Doctrine\DBAL\Migrations\Version[execute]', array($config, $version, 'stdClass'))->makePartial();
         $migration->shouldReceive('execute')->with($direction, true)->andReturn($getSqlReturn);
 
         $expectedReturn = 123;
@@ -198,11 +198,11 @@ class VersionTest extends MigrationTestCase
 
     public function writeSqlFileProvider()
     {
-        return [
-            [__DIR__, 'up', ['1' => ['SHOW DATABASES;']]], // up
-            [__DIR__, 'down', ['1' => ['SHOW DATABASES;']]], // up
-            [__DIR__ . '/tmpfile.sql', 'up', ['1' => ['SHOW DATABASES']]], // tests something actually got written
-        ];
+        return array(
+            array(__DIR__, 'up', array('1' => array('SHOW DATABASES;'))), // up
+            array(__DIR__, 'down', array('1' => array('SHOW DATABASES;'))), // up
+            array(__DIR__ . '/tmpfile.sql', 'up', array('1' => array('SHOW DATABASES'))), // tests something actually got written
+        );
     }
 
     public function testWarningWhenNoSqlStatementIsOutputed()
@@ -305,11 +305,11 @@ class VersionTest extends MigrationTestCase
 
     public function sqlWriteProvider()
     {
-        return [
-            [Version::DIRECTION_UP, 'balalala', 'fkqsdmfjl'],
-            [Version::DIRECTION_UP, 'fkqsdmfjl', 'balalala'],
-            [Version::DIRECTION_DOWN, 'balalala', 'fkqsdmfjl'],
-            [Version::DIRECTION_DOWN, 'fkqsdmfjl', 'balalala'],
-        ];
+        return array(
+            array(Version::DIRECTION_UP, 'balalala', 'fkqsdmfjl'),
+            array(Version::DIRECTION_UP, 'fkqsdmfjl', 'balalala'),
+            array(Version::DIRECTION_DOWN, 'balalala', 'fkqsdmfjl'),
+            array(Version::DIRECTION_DOWN, 'fkqsdmfjl', 'balalala'),
+        );
     }
 }

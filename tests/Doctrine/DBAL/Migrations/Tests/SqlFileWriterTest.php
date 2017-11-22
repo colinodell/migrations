@@ -109,12 +109,12 @@ class SqlFileWriterTest extends MigrationTestCase
 
     public function writeProvider()
     {
-        return [
-            [__DIR__, Version::DIRECTION_UP, [1 => ['SHOW DATABASES']], true],
-            [__DIR__, Version::DIRECTION_UP, [1 => ['SHOW DATABASES']], false],
-            [__DIR__, Version::DIRECTION_DOWN, [1 => ['SHOW DATABASES']], true],
-            [__DIR__, Version::DIRECTION_DOWN, [1 => ['SHOW DATABASES']], false],
-        ];
+        return array(
+            array(__DIR__, Version::DIRECTION_UP, array(1 => array('SHOW DATABASES')), true),
+            array(__DIR__, Version::DIRECTION_UP, array(1 => array('SHOW DATABASES')), false),
+            array(__DIR__, Version::DIRECTION_DOWN, array(1 => array('SHOW DATABASES')), true),
+            array(__DIR__, Version::DIRECTION_DOWN, array(1 => array('SHOW DATABASES')), false),
+        );
     }
 
 }

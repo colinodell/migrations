@@ -10,7 +10,7 @@ class MigrateAddSqlTest extends AbstractMigration
     public function up(Schema $schema)
     {
         $this->addSql("CREATE TABLE test_add_sql_table (test varchar(255))");
-        $this->addSql("INSERT INTO test_add_sql_table (test) values (?)", ['test']);
+        $this->addSql("INSERT INTO test_add_sql_table (test) values (?)", array('test'));
     }
 
     public function down(Schema $schema)

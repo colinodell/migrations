@@ -123,7 +123,7 @@ class Configuration
      *
      * @var Version[]
      */
-    private $migrations = [];
+    private $migrations = array();
 
     /**
      * Versions are organized by year.
@@ -423,7 +423,7 @@ class Configuration
      */
     public function registerMigrations(array $migrations)
     {
-        $versions = [];
+        $versions = array();
         foreach ($migrations as $version => $class) {
             $versions[] = $this->registerMigration($version, $class);
         }
@@ -484,7 +484,7 @@ class Configuration
 
         $version = $this->connection->fetchColumn(
             "SELECT " . $this->migrationsColumnName . " FROM " . $this->migrationsTableName . " WHERE " . $this->migrationsColumnName . " = ?",
-            [$version->getVersion()]
+            array($version->getVersion())
         );
 
         return $version !== false;
@@ -500,7 +500,7 @@ class Configuration
         $this->createMigrationTable();
 
         $ret = $this->connection->fetchAll("SELECT " . $this->migrationsColumnName . " FROM " . $this->migrationsTableName);
-        $versions = [];
+        $versions = array();
         foreach ($ret as $version) {
             $versions[] = current($version);
         }
@@ -515,7 +515,7 @@ class Configuration
      */
     public function getAvailableVersions()
     {
-        $availableVersions = [];
+        $availableVersions = array();
         foreach ($this->migrations as $migration) {
             $availableVersions[] = $migration->getVersion();
         }
@@ -534,7 +534,7 @@ class Configuration
 
         $where = null;
         if (!empty($this->migrations)) {
-            $migratedVersions = [];
+            $migratedVersions = array();
             foreach ($this->migrations as $migration) {
                 $migratedVersions[] = sprintf("'%s'", $migration->getVersion());
             }
@@ -681,12 +681,12 @@ class Configuration
             return false;
         }
 
-        if (!$this->connection->getSchemaManager()->tablesExist([$this->migrationsTableName])) {
-            $columns = [
-                $this->migrationsColumnName => new Column($this->migrationsColumnName, Type::getType('string'), ['length' => 255]),
-            ];
+        if (!$this->connection->getSchemaManager()->tablesExist(array($this->migrationsTableName))) {
+            $columns = array(
+                $this->migrationsColumnName => new Column($this->migrationsColumnName, Type::getType('string'), array('length' => 255)),
+            );
             $table = new Table($this->migrationsTableName, $columns);
-            $table->setPrimaryKey([$this->migrationsColumnName]);
+            $table->setPrimaryKey(array($this->migrationsColumnName));
             $this->connection->getSchemaManager()->createTable($table);
 
             $this->migrationTableCreated = true;
@@ -716,12 +716,12 @@ class Configuration
                 $classes = array_reverse(array_values($this->migrations));
                 $allVersions = array_combine($allVersions, $classes);
             } else {
-                $allVersions = [];
+                $allVersions = array();
             }
         } else {
             $allVersions = $this->migrations;
         }
-        $versions = [];
+        $versions = array();
         $migrated = $this->getMigratedVersions();
         foreach ($allVersions as $version) {
             if ($this->shouldExecuteMigration($direction, $version, $to, $migrated)) {

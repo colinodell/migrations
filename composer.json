@@ -11,7 +11,7 @@
         {"name": "Michael Simonson", "email": "contact@mikesimonson.com" }
     ],
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.3.3",
         "doctrine/dbal": "~2.2",
         "symfony/yaml": "~2.3|~3.0",
         "symfony/console": "~2.3|~3.0"
@@ -20,7 +20,7 @@
         "doctrine/orm": "2.*",
         "phpunit/phpunit": "~4.7",
         "satooshi/php-coveralls": "0.6.*",
-        "doctrine/coding-standard": "dev-master",
+        "doctrine/coding-standard": "*",
         "mockery/mockery": "^0.9.4",
         "johnkary/phpunit-speedtrap": "~1.0@dev"
     },

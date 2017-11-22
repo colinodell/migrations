@@ -33,7 +33,7 @@ abstract class MigrationTestCase extends \PHPUnit_Framework_TestCase
 
     public function getSqliteConnection()
     {
-        $params = ['driver' => 'pdo_sqlite', 'memory' => true];
+        $params = array('driver' => 'pdo_sqlite', 'memory' => true);
 
         return DriverManager::getConnection($params);
     }
@@ -99,7 +99,7 @@ abstract class MigrationTestCase extends \PHPUnit_Framework_TestCase
         if (is_dir($path)) {
             return glob(realpath($path) . '/*.sql');
         } elseif(is_file($path)) {
-            return [$path];
+            return array($path);
         }
     }
 }

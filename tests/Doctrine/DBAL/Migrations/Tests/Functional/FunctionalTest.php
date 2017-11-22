@@ -282,7 +282,7 @@ class FunctionalTest extends MigrationTestCase
 
         $sql = $migration->migrate();
 
-        $this->assertEquals([], $sql);
+        $this->assertEquals(array(), $sql);
     }
 
     /**
@@ -303,15 +303,15 @@ class FunctionalTest extends MigrationTestCase
 
     public function provideTestMigrationNames()
     {
-        return [
-            [[
+        return array(
+            array(array(
                 '20120228123443' => 'Doctrine\DBAL\Migrations\Tests\Stub\Functional\MigrateAddSqlTest',
                 '20120228114838' => 'Doctrine\DBAL\Migrations\Tests\Stub\Functional\MigrationMigrateFurther',
-            ]],
-            [[
+            )),
+            array(array(
                 '002Test' => 'Doctrine\DBAL\Migrations\Tests\Stub\Functional\MigrateAddSqlTest',
                 '001Test' => 'Doctrine\DBAL\Migrations\Tests\Stub\Functional\MigrationMigrateFurther',
-            ]]
-        ];
+            ))
+        );
     }
 }

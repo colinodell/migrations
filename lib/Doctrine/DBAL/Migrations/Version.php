@@ -89,13 +89,13 @@ class Version
     private $class;
 
     /** The array of collected SQL statements for this version */
-    private $sql = [];
+    private $sql = array();
 
     /** The array of collected parameters for SQL statements for this version */
-    private $params = [];
+    private $params = array();
 
     /** The array of collected types for SQL statements for this version */
-    private $types = [];
+    private $types = array();
 
     /** The time in seconds that this migration version took to execute */
     private $time;
@@ -152,7 +152,7 @@ class Version
         $this->configuration->createMigrationTable();
         $this->connection->insert(
             $this->configuration->getMigrationsTableName(),
-            [$this->configuration->getMigrationsColumnName() => $this->version]
+            array($this->configuration->getMigrationsColumnName() => $this->version)
         );
     }
 
@@ -161,7 +161,7 @@ class Version
         $this->configuration->createMigrationTable();
         $this->connection->delete(
             $this->configuration->getMigrationsTableName(),
-            [$this->configuration->getMigrationsColumnName() => $this->version]
+            array($this->configuration->getMigrationsColumnName() => $this->version)
         );
     }
 
@@ -172,14 +172,14 @@ class Version
      * @param array        $params
      * @param array        $types
      */
-    public function addSql($sql, array $params = [], array $types = [])
+    public function addSql($sql, array $params = array(), array $types = array())
     {
         if (is_array($sql)) {
             foreach ($sql as $key => $query) {
                 $this->sql[] = $query;
                 if (isset($params[$key])) {
                     $this->params[count($this->sql) - 1] = $params[$key];
-                    $this->types[count($this->sql) - 1] = isset($types[$key]) ? $types[$key] : [];
+                    $this->types[count($this->sql) - 1] = isset($types[$key]) ? $types[$key] : array();
                 }
             }
         } else {
@@ -206,7 +206,7 @@ class Version
 
         $this->outputWriter->write("\n# Version " . $this->version . "\n");
 
-        $sqlQueries = [$this->version => $queries];
+        $sqlQueries = array($this->version => $queries);
         $sqlWriter = new SqlFileWriter(
             $this->configuration->getMigrationsColumnName(),
             $this->configuration->getMigrationsTableName(),
@@ -242,7 +242,7 @@ class Version
      */
     public function execute($direction, $dryRun = false, $timeAllQueries = false)
     {
-        $this->sql = [];
+        $this->sql = array();
 
         $transaction = $this->migration->isTransactional();
         if ($transaction) {
@@ -317,7 +317,7 @@ class Version
 
             $this->state = self::STATE_NONE;
 
-            return [];
+            return array();
         } catch (\Exception $e) {
 
             $this->outputWriter->write(sprintf(

@@ -14,7 +14,7 @@ class MigrateAddSqlPostAndPreUpAndDownTest extends AbstractMigration
     {
         $this->addSql(
             sprintf("INSERT INTO %s (test) values (?)", self::TABLE_NAME),
-            [1]
+            array(1)
         );
     }
 
@@ -22,7 +22,7 @@ class MigrateAddSqlPostAndPreUpAndDownTest extends AbstractMigration
     {
         $this->addSql(
             sprintf("INSERT INTO %s (test) values (?)", self::TABLE_NAME),
-            [2]
+            array(2)
         );
     }
 
@@ -30,7 +30,7 @@ class MigrateAddSqlPostAndPreUpAndDownTest extends AbstractMigration
     {
         $this->addSql(
             sprintf("INSERT INTO %s (test) values (?)", self::TABLE_NAME),
-            [3]
+            array(3)
         );
     }
 
@@ -38,7 +38,7 @@ class MigrateAddSqlPostAndPreUpAndDownTest extends AbstractMigration
     {
         $this->addSql(
             sprintf("INSERT INTO %s (test) values (?)", self::TABLE_NAME),
-            [4]
+            array(4)
         );
     }
 
@@ -46,7 +46,7 @@ class MigrateAddSqlPostAndPreUpAndDownTest extends AbstractMigration
     {
         $this->addSql(
             sprintf("INSERT INTO %s (test) values (?)", self::TABLE_NAME),
-            [5]
+            array(5)
         );
     }
 
@@ -54,7 +54,7 @@ class MigrateAddSqlPostAndPreUpAndDownTest extends AbstractMigration
     {
         $this->addSql(
             sprintf("INSERT INTO %s (test) values (?)", self::TABLE_NAME),
-            [6]
+            array(6)
         );
     }
 }

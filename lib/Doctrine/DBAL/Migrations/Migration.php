@@ -156,7 +156,7 @@ class Migration
          * to signify that there is nothing left to do.
          */
         if ($from === $to && empty($migrationsToExecute) && !empty($migrations)) {
-            return [];
+            return array();
         }
 
         $output = $dryRun ? 'Executing dry run of migration' : 'Migrating';
@@ -170,7 +170,7 @@ class Migration
             throw MigrationException::noMigrationsToExecute();
         }
 
-        $sql = [];
+        $sql = array();
         $time = 0;
         foreach ($migrationsToExecute as $version) {
             $versionSql = $version->execute($direction, $dryRun, $timeAllQueries);

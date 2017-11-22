@@ -1,2 +1,2 @@
 <?php
-return ["organize_migrations" => "foo-bar"];
+return array("organize_migrations" => "foo-bar");

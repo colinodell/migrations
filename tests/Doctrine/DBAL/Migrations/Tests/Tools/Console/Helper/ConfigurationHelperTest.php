@@ -46,8 +46,8 @@ class ConfigurationHelperTest extends MigrationTestCase
         $this->connection = $this->getSqliteConnection();
 
         $this->input = $this->getMockBuilder('Symfony\Component\Console\Input\ArrayInput')
-            ->setConstructorArgs([[]])
-            ->setMethods(['getOption'])
+            ->setConstructorArgs(array(array()))
+            ->setMethods(array('getOption'))
             ->getMock();
     }
 

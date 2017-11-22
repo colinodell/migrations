@@ -60,7 +60,7 @@ class CliTest extends MigrationTestCase
         $output = $this->executeCommand('migrations:latest');
         $this->assertContains('20150426000000', $output);
 
-        $this->executeCommand('migrations:migrate', 'config.yml', ['--no-interaction']);
+        $this->executeCommand('migrations:migrate', 'config.yml', array('--no-interaction'));
         $this->assertSuccessfulExit();
 
         $output = $this->executeCommand('migrations:status');
@@ -113,7 +113,7 @@ class CliTest extends MigrationTestCase
 
     public function testMigrationDiffWithEntityManagerGeneratesMigrationFromEntities()
     {
-        $config = OrmSetup::createXMLMetadataConfiguration([__DIR__.'/_files/entities'], true);
+        $config = OrmSetup::createXMLMetadataConfiguration(array(__DIR__.'/_files/entities'), true);
         $entityManager = EntityManager::create($this->conn, $config);
         $this->application->getHelperSet()->set(
             new EntityManagerHelper($entityManager),
@@ -179,8 +179,8 @@ class CliTest extends MigrationTestCase
 
         $schema = new Schema();
         $t = $schema->createTable('FOO');
-        $t->addColumn('id', 'integer', ['autoincrement' => true]);
-        $t->setPrimaryKey(['id']);
+        $t->addColumn('id', 'integer', array('autoincrement' => true));
+        $t->setPrimaryKey(array('id'));
 
         $this->withDiffCommand(new StubSchemaProvider($schema));
         $this->assertVersionCount(0, 'should start with no versions');
@@ -212,14 +212,14 @@ class CliTest extends MigrationTestCase
             new ConnectionHelper($this->conn),
             'connection'
         );
-        $this->application->addCommands([
+        $this->application->addCommands(array(
             new MigrationCommands\ExecuteCommand(),
             new MigrationCommands\GenerateCommand(),
             new MigrationCommands\LatestCommand(),
             new MigrationCommands\MigrateCommand(),
             new MigrationCommands\StatusCommand(),
             new MigrationCommands\VersionCommand(),
-        ]);
+        ));
     }
 
     protected function withDiffCommand(SchemaProviderInterface $provider=null)
@@ -227,13 +227,13 @@ class CliTest extends MigrationTestCase
         $this->application->add(new MigrationCommands\DiffCommand($provider));
     }
 
-    protected function executeCommand($commandName, $configFile = 'config.yml', array $args = [])
+    protected function executeCommand($commandName, $configFile = 'config.yml', array $args = array())
     {
         $input = new ArrayInput(array_merge(
-            [
+            array(
                 'command'         => $commandName,
                 '--configuration' => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . $configFile,
-            ],
+            ),
             $args
         ));
         $output = $this->getOutputStream();
@@ -257,16 +257,16 @@ class CliTest extends MigrationTestCase
     {
         $s = new Schema();
         $t = $s->createTable('foo');
-        $t->addColumn('id', 'integer', [
+        $t->addColumn('id', 'integer', array(
             'autoincrement' => true,
-        ]);
-        $t->setPrimaryKey(['id']);
+        ));
+        $t->setPrimaryKey(array('id'));
 
         $t = $s->createTable('bar');
-        $t->addColumn('id', 'integer', [
+        $t->addColumn('id', 'integer', array(
             'autoincrement' => true,
-        ]);
-        $t->setPrimaryKey(['id']);
+        ));
+        $t->setPrimaryKey(array('id'));
 
         return $s;
     }

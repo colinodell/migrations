@@ -49,14 +49,14 @@ abstract class AbstractFileConfiguration extends Configuration
     /**
      * @var array of possible configuration properties in migrations configuration.
      */
-    private $configurationProperties = [
+    private $configurationProperties = array(
         'name' => 'setName',
         'table_name' => 'setMigrationsTableName',
         'migrations_namespace' => 'setMigrationsNamespace',
         'organize_migrations' => 'setMigrationOrganisation',
         'migrations_directory' => 'loadMigrationsFromDirectory',
         'migrations' => 'loadMigrations',
-    ];
+    );
 
     protected function setConfiguration(Array $config)
     {

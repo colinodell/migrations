@@ -18,7 +18,7 @@ class Helper
         if ('' === $path) {
             return false;
         }
-        $class_func = [__CLASS__, __FUNCTION__];
+        $class_func = array(__CLASS__, __FUNCTION__);
 
         return is_file($path) ?
             @unlink($path) :

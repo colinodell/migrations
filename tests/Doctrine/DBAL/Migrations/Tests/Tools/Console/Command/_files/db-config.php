@@ -1,3 +1,3 @@
 <?php
 
-return ['driver' => 'pdo_sqlite', 'memory' => true];
+return array('driver' => 'pdo_sqlite', 'memory' => true);

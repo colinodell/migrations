@@ -45,7 +45,7 @@ class XmlConfiguration extends AbstractFileConfiguration
         }
 
         $xml = simplexml_load_file($file, "SimpleXMLElement", LIBXML_NOCDATA);
-        $config = [];
+        $config = array();
 
         if (isset($xml->name)) {
             $config['name'] = (string) $xml->name;
